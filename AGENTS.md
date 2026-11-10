@@ -11,7 +11,7 @@ repositories, every skill, the rules for every change) is
 |---|---|
 | `design/pairs-patch.js` | the screen: Library components in slots under `#pairs-root`, named `#pairs/...` |
 | `design/weather-pictures.js` | the app's own pictures of the weather, the set `#pairs-weather` |
-| `design/build.sh` | builds the design: `design/build/pairs.fig` and `data/pairs.dcf` |
+| `design/build.sh` | builds the design: `design/pairs.fig` and `data/pairs.dcf` |
 | `data/pairs.dcf` | the design the app loads; committed |
 | `src/ui_model.rs` | the names of the design the code writes to or taps |
 | `src/state.rs, actions.rs, presenter.rs` | the state, what a gesture or the data changes, the state to the screen |
@@ -37,7 +37,7 @@ repositories, every skill, the rules for every change) is
 ## Commands
 
 ```bash
-# the design: the Library, this app's .fig (design/build/, not in git) and data/pairs.dcf
+# the design: the Library, this app's .fig (design/, in git: what a designer opens) and data/pairs.dcf
 packages/services/display_safety/utils/pairs-app/design/build.sh
 # the app, for the RB3 (from the tree's top)
 bash -c 'source device/rb3/sdv_media_db845c/tools/env.sh >/dev/null 2>&1; m pairs_app'
