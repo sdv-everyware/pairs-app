@@ -22,12 +22,33 @@ packages/services/display_safety/utils/pairs-app/design/build.sh     # from anyw
 ```
 
 It builds the Library (ui-lib `design/build-library.sh`, `design/build/library.fig` there), this
-app's `design/build/pairs.fig` (a build output, not in git: open it in Figma to look at it) and
+app's `design/pairs.fig` (in git: the file a designer opens, see below) and
 `data/pairs.dcf`; `CHECK='#pairs/time #pairs/...'` names what must be in the .dcf.
 fig-to-dcf.sh imports with everyware's `tools/dcf` (dcf-fetch `--local`, on our fork of
 DesignCompose). A new board like this one: `vendor/sdv-everyware/ui-lib/skills/new-app/SKILL.md`.
 
 The names under `#pairs-root` (`#pairs/*`) are the contract with `src/ui_model.rs`: rename both or neither.
+
+
+## The design in Figma, without scripts
+
+`design/pairs.fig` is this app's screen as a Figma file: what is built, checked into git, and
+what a designer opens. The plain path, no agent and no tools:
+
+1. **Open it**: Figma, File > Import, `design/pairs.fig`. The screen is the frame `#pairs-root`;
+   the Library (the components the screen is made of) is on its Components page.
+2. **Change it** as in any Figma file: move, recolour, add a layer, swap an instance's variant.
+   The layer names starting with `#` are the contract with the code (`src/ui_model.rs`): keep
+   them; a new element the app should drive gets a `#pairs/<name>` of its own, and the app a
+   field with that name.
+3. **Hand it over**: share the Figma file. The developer fetches it into the app once with
+   `scripts/fetch-dcf.sh data/pairs.dcf <file key>` (the key is in the file's URL), and the
+   board shows it.
+
+What the scripts add on top is only the other direction: `design/build.sh` writes this `.fig`
+from `design/pairs-patch.js` (an agent's or a developer's drawing in code) and the Library, and
+makes the `.dcf` without Figma. Both ways meet in the same `.fig` and the same `.dcf`; the
+`#names` are what keeps them together.
 
 ## Build and run on the RB3
 
