@@ -2,8 +2,8 @@
 
 A memory game for the hallway panel on harry (1920 x 1080): 12 cards face down in a 4 x 3 grid,
 six pairs of weather kinds dealt from a seed (`--seed` fixes the deal). A tap turns a card up; a
-match stays up, a miss turns back after a second. The kind of the weather now (the dashboard
-bundle on port 7100) is the joker: always one of the six pairs, and its pair counts double. The
+match stays up, a miss turns back after a second. The kind of the weather now (from the dashboard
+bundle) is the joker: always one of the six pairs, and its pair counts double. The
 sidebar shows the moves, the pairs found, the round's time and, at the end, "Done in N moves,
 mm:ss" with New round. A card is two Library slots: a `#button` back that takes the tap and a
 face over it from the app's own picture set `#pairs-weather` (`design/weather-pictures.js`,
@@ -51,19 +51,20 @@ from `design/pairs-patch.js` (an agent's or a developer's drawing in code) and t
 makes the `.dcf` without Figma. Both ways meet in the same `.fig` and the same `.dcf`; the
 `#names` are what keeps them together.
 
-## Build and run on the RB3
+## Build and run
 
 ```bash
-# from the tree's top: build (sdv_media_db845c, out_rb3)
-source device/rb3/sdv_media_db845c/tools/env.sh; m pairs_app
+# from the tree's top: build for the device's product, here the Cuttlefish VM
+source device/cf-everyware/sdv_media_everyware_cf/tools/env.sh; m pairs_app
 
-# the panel's dashboard bundle on 127.0.0.1:7100 serves one app at a time: stop the other one first
-adb shell mkdir -p /data/local/tmp/pairs
-adb push out_rb3/target/product/sdv_media_db845c/system/bin/pairs_app /data/local/tmp/pairs/
-adb push packages/services/display_safety/utils/pairs-app/data/pairs.dcf /data/local/tmp/pairs/
-adb shell "cd /data/local/tmp/pairs; LD_LIBRARY_PATH=/system/lib64:/vendor/lib64:/apex/com.everyware.smarthome/lib64 \
-    ./pairs_app --data-path /data/local/tmp/pairs --touch-size 1920x1080"
+# push the binary and the design to adb's device, stop the panel, run the app
+packages/services/display_safety/utils/pairs-app/scripts/run.sh
+packages/services/display_safety/utils/pairs-app/scripts/run.sh log     # its log lines
+packages/services/display_safety/utils/pairs-app/scripts/run.sh stop    # the panel is back
 ```
+
+The dashboard bundle talks to one screen at a time (the binder service IScreenLink): the script
+stops the panel, and another app started this way has to be stopped with its own script first.
 
 The fonts are compiled in (`data/*.otf`); the time comes from the board's clock, the weather
 from the dashboard bundle.

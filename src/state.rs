@@ -3,7 +3,7 @@
 
 use crate::clock::Clock;
 use crate::game::{Face, Game, Rng, CARDS};
-use everyware_dashboard_grpc::weather::Weather;
+use everyware_catalog::weather::Weather;
 use everyware_ui::button::{Button, ButtonKind};
 use std::time::Instant;
 
