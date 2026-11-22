@@ -15,7 +15,7 @@ repositories, every skill, the rules for every change) is
 | `data/pairs.dcf` | the design the app loads; committed |
 | `src/ui_model.rs` | the names of the design the code writes to or taps |
 | `src/state.rs, actions.rs, presenter.rs` | the state, what a gesture or the data changes, the state to the screen |
-| `src/house_link.rs` | the house's data from the dashboard bundle (gRPC, 127.0.0.1:7100; one app at a time holds the port) |
+| `src/house_link.rs` | the house's data from the dashboard bundle (binder, `IScreenLink`, through everyware's `interfaces/screen/link`; one app at a time serves the name) |
 | `src/game.rs` | the rules of a round, pure, with host tests (`pairs_app_game_test`) |
 | `src/weather.rs` | the face of the weather now (the joker) and each face's picture |
 

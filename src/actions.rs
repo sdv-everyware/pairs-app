@@ -5,7 +5,7 @@
 use crate::clock::Clock;
 use crate::game::{self, Face, Tap, CARDS};
 use crate::state::State;
-use everyware_dashboard_grpc::weather::Weather;
+use everyware_catalog::weather::Weather;
 use everyware_ui::button::ButtonEvent;
 use everyware_ui::{row_of, Gesture};
 use harry::side_effects::SideEffects;
